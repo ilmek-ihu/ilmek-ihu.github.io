@@ -158,7 +158,7 @@ function render(){
   document.querySelectorAll(".choice button").forEach(b => b.setAttribute("aria-pressed", b.dataset.g === group));
 }
 document.querySelectorAll(".choice button").forEach(b => b.addEventListener("click", () => {
-  group = b.dataset.g; try{localStorage.setItem("ilmek-g", group)}catch(e){} render();
+  group = b.dataset.g; render();
 }));
 document.getElementById("switch").addEventListener("click", () => { device = device === "ios" ? "android" : "ios"; render(); });
 document.addEventListener("click", e => {
@@ -168,7 +168,7 @@ document.addEventListener("click", e => {
   const fallback = () => { inp.focus(); inp.select(); btn.textContent = "Seçildi, kopyalayın"; };
   if (navigator.clipboard) navigator.clipboard.writeText(inp.value).then(done, fallback); else fallback();
 });
-try{ const s = localStorage.getItem("ilmek-g"); if (s && CAL[s]) { group = s; render(); } }catch(e){}
+try{ localStorage.removeItem("ilmek-g"); }catch(e){}
 </script>
 
 </body>
